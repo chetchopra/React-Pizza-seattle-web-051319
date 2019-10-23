@@ -1,8 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, Button } from 'react';
 import Pizza from '../components/Pizza'
 class PizzaList extends Component {
 
   render() {
+    const generatePizzaRows = () => {
+      return this.props.PizzaList.map((pizza) => {
+        return (<tr key={pizza.id}>
+          <td>{pizza.topping}</td>
+          <td>{pizza.size}</td>
+          <td>{pizza.vegetarian ? "Yes" : "No"}</td>
+          <td><button type="submit"
+                      className="btn btn-primary" 
+                      onClick={() => {
+                        this.props.updateChangingPizza(pizza)
+                      }}>
+                        Edit</button></td>
+        </tr>)
+      })
+    }
     return (
       <table className="table table-striped">
         <thead>
@@ -15,7 +30,7 @@ class PizzaList extends Component {
         </thead>
         <tbody>
           {
-            //render Pizza here
+            generatePizzaRows()
           }
         </tbody>
       </table>
